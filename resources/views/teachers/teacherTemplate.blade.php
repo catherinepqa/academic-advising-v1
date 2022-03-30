@@ -138,11 +138,11 @@
                             <span>My Schedule</span>
                         </a>
 
-                        <a href="{{ route('teacherAppointment') }}" class="dropdown-item notify-item
+                        <!--<a href="{{ route('teacherAppointment') }}" class="dropdown-item notify-item
                         {{ (request()->is('teacher/appointment')) ? 'active' : '' }}">
                             <i class="fe-clipboard"></i>
                             <span>Appointment List</span>
-                        </a>
+                        </a>-->
 
                         <div class="dropdown-divider"></div>
 

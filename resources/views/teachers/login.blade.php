@@ -97,7 +97,8 @@
 
                         <div class="row mt-3">
                             <div class="col-12 text-center">
-                                <p> <a href="{{ route('forgotPass') }}" class="text-white-50 ml-1">Forgot your password?</a></p>
+                                {{-- <p> <a href="{{ route('forgotPass') }}" class="text-white-50 ml-1">Forgot your password?</a></p> --}}
+                                <p> <a href="javascript:void(0);" class="text-white-50 ml-1">Forgot your password?</a></p>
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
