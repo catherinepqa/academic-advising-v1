@@ -33,10 +33,15 @@ class Schedule extends Model
 
     public static function scheduleList($monday, $friday, $teacher_id, $status = null)
     {
-        $data = self::where([
-                    ['schedules.teacher_id', '=', $teacher_id],
-                    ['schedules.status', '=', $status]
-                ])
+        $con = [];
+
+        if ($status == 'Active') {
+            $con1 = ['schedules.status', '=', 'Active'];
+            array_push($con, $con1);
+        }
+        array_push($con, ['schedules.teacher_id', '=', $teacher_id]);
+        
+        $data = self::where($con)
                 ->whereBetween('schedules.date', [$monday, $friday])
                 ->orderBy('schedules.date', 'asc')
                 ->get();      
