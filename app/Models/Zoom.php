@@ -16,7 +16,7 @@ class Zoom extends Model
     const MEETING_TYPE_RECURRING = 3;
     const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
 
-    public function generateZoomToken()
+    public static function generateZoomToken()
     {
         $key = env('ZOOM_API_KEY', '');
         $secret = env('ZOOM_API_SECRET', '');
@@ -27,12 +27,12 @@ class Zoom extends Model
         return JWT::encode($payload, $secret, 'HS256');
     }
 
-    public function retrieveZoomUrl()
+    public static function retrieveZoomUrl()
     {
         return env('ZOOM_API_URL', '');
     }
 
-    public function zoomRequest()
+    public static function zoomRequest()
     {
         $jwt = self::generateZoomToken();
         return \Illuminate\Support\Facades\Http::withHeaders([
@@ -41,28 +41,28 @@ class Zoom extends Model
         ]);
     }
 
-    public function zoomGet(string $path, array $query = [])
+    public static function zoomGet(string $path, array $query = [])
     {
         $url = self::retrieveZoomUrl();
         $request = self::zoomRequest();
         return $request->get($url . $path, $query);
     }
 
-    public function zoomPost(string $path, array $body = [])
+    public static function zoomPost(string $path, array $body = [])
     {
         $url = self::retrieveZoomUrl();
         $request = self::zoomRequest();
         return $request->post($url . $path, $body);
     }
 
-    public function zoomPatch(string $path, array $body = [])
+    public static function zoomPatch(string $path, array $body = [])
     {
         $url = self::retrieveZoomUrl();
         $request = self::zoomRequest();
         return $request->patch($url . $path, $body);
     }
 
-    public function zoomDelete(string $path, array $body = [])
+    public static function zoomDelete(string $path, array $body = [])
     {
         $url = self::retrieveZoomUrl();
         $request = self::zoomRequest();
