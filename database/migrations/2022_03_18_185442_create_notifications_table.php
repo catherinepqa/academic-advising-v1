@@ -18,7 +18,7 @@ class CreateNotificationsTable extends Migration
             $table->bigInteger('event_id');
             $table->bigInteger('sender_id');
             $table->bigInteger('receiver_id');
-            $table->string('message');
+            $table->text('message');
             $table->integer('is_read')->default(0);
             $table->timestamps();
         });

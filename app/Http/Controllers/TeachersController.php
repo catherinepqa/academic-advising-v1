@@ -13,6 +13,7 @@ use App\Models\Profile;
 use App\Models\Schedule;
 use App\Models\ScheduleTime;
 use App\Models\User;
+use App\Models\Zoom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -185,6 +186,7 @@ class TeachersController extends Controller
     {
         $status = $request->status;
         $event_status = $status == 'approved' ? 'Approved' : 'Declined';
+        $sched_status = $status == 'approved' ? 'Approved' : 'Active';
 
         //Updating the event
         $event = Event::where('event_id', $request->event_id)->first();
@@ -194,7 +196,7 @@ class TeachersController extends Controller
 
          //Updating the Schedule
         $schedule = Schedule::where('schedule_id', $event->schedule_id)->first();
-        $schedule->status       = $event_status;
+        $schedule->status       = $sched_status;
         $schedule->updated_at   = date('Y-m-d H:i:s');
         $schedule->save();
 
@@ -205,10 +207,19 @@ class TeachersController extends Controller
         $notif->save();
 
         //Send a notification to the student
-        $stringStartDate = date('l jS \of F Y h:i A', strtotime($event->start_date));
-        $stringEndDate =  date('h:i A', strtotime($event->end_date));
-        $title = session('full_name').' '.$status.' the appointment that you booked on '.$stringStartDate . ' to ' .$stringEndDate. 
-                 ' due to this reason: '.$request->reason;
+        $stringStartDate = date('l jS \of F Y h:i A', strtotime($schedule->start_date_time));
+        $stringEndDate =  date('h:i A', strtotime($schedule->end_date_time));
+        
+        if ($status == 'approved') {
+            $title = session('full_name').' '.$status.' the appointment that you booked on '.$stringStartDate . ' to ' .$stringEndDate;
+        } else {
+            $title = session('full_name').' '.$status.' the appointment that you booked on '.$stringStartDate . ' to ' .$stringEndDate. 
+                     ' due to this reason: '.$request->reason;
+
+            //Delete the zoom meeting in zoom if the teacher decline the request
+            Zoom::deleteZoom($event->zoom_meeting_id);
+        }
+        
         $request->merge([
             'event_id' => $request->event_id,
             'message' => $title,
@@ -313,20 +324,17 @@ class TeachersController extends Controller
     {
         $arr = [];
         $data = '';
-        $list = Schedule::scheduleList($request->monday, $request->friday, $request->teacher_id);
+        $list = Schedule::scheduleList($request->monday, $request->friday, $request->teacher_id, 'Active');
 
         foreach ($list as $li) {
-            if ($li->status == 'Active') {
-                $data = [
-                    'start'         => date('h:i A', strtotime($li->start_date_time)),
-                    'end'           => date('h:i A', strtotime($li->end_date_time)),
-                    'day'           => $li->day,
-                    'schedule_id'   => $li->schedule_id
-                ];
-            }
+            $data = [
+                'start'         => date('h:i A', strtotime($li->start_date_time)),
+                'end'           => date('h:i A', strtotime($li->end_date_time)),
+                'day'           => $li->day,
+                'schedule_id'   => $li->schedule_id
+            ];
             array_push($arr, $data);
         }
-
         return json_encode($arr);
     }
 

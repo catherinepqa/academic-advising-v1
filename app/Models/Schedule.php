@@ -31,10 +31,11 @@ class Schedule extends Model
         return $data;
     }
 
-    public static function scheduleList($monday, $friday, $teacher_id)
+    public static function scheduleList($monday, $friday, $teacher_id, $status = null)
     {
         $data = self::where([
-                    ['schedules.teacher_id', '=', $teacher_id]
+                    ['schedules.teacher_id', '=', $teacher_id],
+                    ['schedules.status', '=', $status]
                 ])
                 ->whereBetween('schedules.date', [$monday, $friday])
                 ->orderBy('schedules.date', 'asc')
