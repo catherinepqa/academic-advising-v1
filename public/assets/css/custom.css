@@ -82,11 +82,6 @@ tr {
     cursor: default;
 }
 
-table#notif-table {
-    border-collapse: separate;
-    border-spacing: 0 10px;
-}
-
 #preloader {
     background-color: #343a40bf !important;
 }
@@ -149,4 +144,9 @@ table#notif-table {
 }
 .time-list-approve a {
     display: none;
+}
+
+table#notif-table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
 }
