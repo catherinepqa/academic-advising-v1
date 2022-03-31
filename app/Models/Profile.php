@@ -56,10 +56,9 @@ class Profile extends Model
 			if (!file_exists($dir)) {
 				mkdir($dir,0777,TRUE);
 			}
-			$Image = Image::make($img);
-			$filename = $img->getClientOriginalName();
-			$Image->save($dir.'/'.$filename);
-
+            $filename = $img->getClientOriginalName();
+			//$file = $request->file('file');
+            $img->move(base_path($dir), $filename);
 			$data = [
 				'avatar' => $filename,
 			];
