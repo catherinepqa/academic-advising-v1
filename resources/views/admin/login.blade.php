@@ -64,13 +64,13 @@
                                     @endif
                                     <div class="form-group mb-3">
                                         <label for="emailaddress">Email address</label>
-                                        <input class="form-control" type="email" id="emailaddress" name="email" required="" placeholder="Enter your email">
+                                        <input class="form-control" type="email" id="emailaddress" name="email" required="" placeholder="admin@gmail.com">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label for="password">Password</label>
                                         <div class="input-group input-group-merge">
-                                            <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password">
+                                            <input type="password" id="password" class="form-control" name="password" placeholder="12345678">
                                             <div class="input-group-append" data-password="false">
                                                 <div class="input-group-text">
                                                     <span class="password-eye"></span>
