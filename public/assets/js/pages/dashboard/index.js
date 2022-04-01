@@ -63,7 +63,7 @@ $(function () {
                             } else if (data == 'Declined') {
                                 status = '<span class="badge badge-soft-danger">'+data+'</span>';
                             } else {
-                                status = '<span class="badge badge-soft-danger">'+data+'</span>';
+                                status = '<span class="badge badge-soft-warning">'+data+'</span>';
                             }
 
                             return status;

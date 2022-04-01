@@ -32,7 +32,7 @@
     </div>
 @endsection
 
-@section('content-1')
+@section('content')
 <div class="row">
     <div class="col-sm-6 col-xl-4">
         <div class="p-2 text-center card-box">
