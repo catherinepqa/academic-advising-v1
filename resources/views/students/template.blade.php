@@ -29,6 +29,9 @@
             margin-top: -3%;
             margin-left: -5%;
         }
+        .noti-title a:hover {
+            color: #f3993e !important;
+        }
     </style>
     @yield('css')
 </head>
@@ -60,20 +63,14 @@
                         <div class="dropdown-item noti-title">
                             <h5 class="m-0">
                                 <span class="float-right">
-                                    <a href="" class="text-dark">
-                                        <small>Clear All</small>
+                                    <a href="{{ route('studentChat') }}" class="text-dark">
+                                        <small>View All</small>
                                     </a>
                                 </span>Messages
                             </h5>
                         </div>
 
                         <div class="msg"></div>
-
-                        <!-- All-->
-                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                            View all
-                            <i class="fe-arrow-right"></i>
-                        </a>
 
                     </div>
                 </li>

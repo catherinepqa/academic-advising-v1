@@ -68,6 +68,7 @@
                                         <label for="emailaddress">New Password</label>
                                         <input class="form-control" type="password" name="new_password" id="emailaddress" required="" placeholder="Enter your new password">
                                         <input type="hidden" name="user_id" value="{{ $user_id }}">
+                                        <input type="hidden" class="role" value="{{ $role }}">
                                     </div>
 
                                     <div class="btn btn-block hidden spinner_div">
@@ -115,7 +116,8 @@
         <script>
            $('#resetBtn').click(function(){
                 var add_url = "{{ route('changePassword') }}";
-                var index_url = "{{ route('adminLogIn') }}";
+                var role = $('.role').val();
+                var url = role == 'student' ?  "{{ route('studentLogIn') }}" : "{{ route('teacherLogIn') }}";
                 data = $("#form").serialize();
 
                 if ($('#form').parsley().validate()) {
@@ -137,7 +139,7 @@
                                     type: "success",
                                     confirmButtonColor:"#f2993e",
                                 }).then(function() {
-                                    window.location.href = index_url;
+                                    window.location.href = url;
                                 });
                             } else {
                                 swal({

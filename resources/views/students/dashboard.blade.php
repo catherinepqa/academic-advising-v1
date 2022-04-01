@@ -78,7 +78,7 @@
                     <input type="hidden" class="teacher_name_{{ $teacher->profile_id }}" value="{{ $teacher->first_name.' '.$teacher->last_name }}">
                     <input type="hidden" class="teacher_email_{{ $teacher->profile_id }}" value="{{ $teacher->email }}">
 
-                    <button type="button" class="btn btn-primary btn-sm waves-effect waves-light">Message</button>
+                    <button type="button" class="btn btn-primary btn-sm waves-effect waves-light" onclick="message({{ $teacher->profile_id }})">Message</button>
                     <button type="button" class="btn btn-dark btn-sm waves-effect" onclick="bookAppointment({{ $teacher->profile_id }})" >Book an Appointment</button>
 
                 </div> <!-- end .padding -->

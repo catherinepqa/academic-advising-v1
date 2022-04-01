@@ -185,6 +185,7 @@ class Controller extends BaseController
 
     public function resetPass($id)
     {
-        return view('admin.reset_password', ['user_id' => $id]);
+        $user = User::where('id', $id)->first();
+        return view('admin.reset_password', ['user_id' => $id, 'role' => $user->role]);
     }
 }

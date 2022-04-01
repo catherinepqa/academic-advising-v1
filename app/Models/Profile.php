@@ -58,7 +58,7 @@ class Profile extends Model
 			}
             $filename = $img->getClientOriginalName();
 			//$file = $request->file('file');
-            $img->move(base_path($dir), $filename);
+            $img->move(base_path('/public/assets/images/user_avatars/'.$request->profile_id.'/'), $filename);
 			$data = [
 				'avatar' => $filename,
 			];

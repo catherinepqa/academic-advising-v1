@@ -54,7 +54,7 @@
         <div class="p-2 text-center card-box">
             <i class="mdi mdi-calendar-month text-primary mdi-24px"></i>
             <h3><span data-plugin="counterup">{{ $events }}</span></h3>
-            <p class="text-muted font-15 mb-0">Total Number of Appointments</p>
+            <p class="text-muted font-15 mb-0">Total Number of Approved Appointments</p>
         </div>
     </div>
 
